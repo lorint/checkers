@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+		.square {width:64px;height:64px; border:2px solid gold;
+			background-color: black;
+			color: #FFFFFF;
+			font-size: 20pt;
+			font-family: Arial;
+			text-align: center
+		}
+		.red {background-color: red}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="script.js"></script>
+</head>
+<body x-ng-app="" x-ng-controller="ChessController">
+
+<table>
+	<tr x-ng-repeat="row in board track by $index">
+		<td id="cell{{ ($parent.$index * 8) + $index }}" x-ng-class="{square:true,red:((($parent.$index + 1) + $index) % 2 == 1)}" x-ng-repeat="cell in row track by $index"
+		x-ng-bind="cell"
+		x-ng-click="makeMove($index, $parent.$index);">
+		</td>
+	</tr>
+</table>
+
+<div id="validMovesList">
+	All valid moves:
+	<ul>
+		<li x-ng-repeat="move in allValidMoves" x-ng-bind="move"></li>
+	</ul>
+</div>
+
+</body>
+</html>
